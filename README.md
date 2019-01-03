@@ -2,8 +2,8 @@
 集成常用的方法驱动<br/>
 引入方式<br/>
 ``` bash
-    npm i --S ''
-    import {MessageCenter} from ''
+    npm i utiltool-pubsub --S
+    import {MessageCenter} from 'utiltool-pubsub'
 ```
 ####目录
 
