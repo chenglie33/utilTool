@@ -2,7 +2,7 @@ const path = require('path');
 const HappyPack = require('happypack');
 // const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './src/index.js',
   devtool: 'inline-source-map',
   output: {
