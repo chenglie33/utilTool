@@ -8,9 +8,10 @@ module.exports = {
         "sourceType": "module"
     },
     "extends": "standard",
+    "parser": "babel-eslint",
     "rules":{
         'semi': 0,
-        "no-new":0
+        "no-new":0,
     },
     "globals":{
         "describe":true,

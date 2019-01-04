@@ -13,6 +13,7 @@
     "@babel/transform-runtime",
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-transform-async-to-generator",
+    "@babel/plugin-proposal-class-properties",
     "lodash"//使用lodash库是减少体积  模块
   ]
 }
