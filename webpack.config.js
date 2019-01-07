@@ -1,6 +1,7 @@
 const path = require('path');
 const HappyPack = require('happypack');
 // const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 module.exports = {
   mode: 'production',
   entry: './src/index.js',
@@ -8,7 +9,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'src/dist'),
     filename: '[name].js',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    library: 'UtilTools'
   },
   module: {
     rules: [
@@ -35,7 +37,8 @@ module.exports = {
       // threadPool: happyThreadPool,
       // // 允许 HappyPack 输出日志
       // verbose: true
-    })
+    }),
+    new BundleAnalyzerPlugin()
   ]
 
 };

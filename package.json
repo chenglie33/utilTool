@@ -1,6 +1,6 @@
 {
   "name": "utiltool-pubsub",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "实现发布订阅模式",
   "main": "src/dist/main.js",
   "scripts": {
@@ -47,6 +47,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^3.0.5",
     "webpack": "^4.28.2",
+    "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
