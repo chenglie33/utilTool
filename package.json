@@ -1,6 +1,6 @@
 {
   "name": "utiltool-pubsub",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "实现发布订阅模式",
   "main": "src/dist/main.js",
   "scripts": {

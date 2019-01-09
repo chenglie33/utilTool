@@ -113,12 +113,32 @@ class Utiltool {
      */
   static isEmpty (data) {
     let str = /\s+/g;
-    if (!data || data === '' || data === undefined || data === null) {
+    if (!data || data === '' || typeof data === 'undefined' || data === null) {
       return false
     }
     let datas = data.replace(str, '');
     if (datas === '') return false
     return true;
+  }
+
+  /**
+     * 获取地址栏的参数信息
+     * @param name
+     * @returns {*}
+     */
+  static getUrlparam (name) {
+    const search = location.search;
+    var value;
+    if (search) {
+      search.slice(1).split('&').some((fragment) => {
+        const arr = fragment.split('=');
+        if (arr[0] === name) {
+          value = arr[1];
+          return true;
+        }
+      });
+    }
+    return value;
   }
 }
 
