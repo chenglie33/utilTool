@@ -1,5 +1,7 @@
 const path = require('path');
+const webpack = require('webpack')
 const HappyPack = require('happypack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 // const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length })
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 module.exports = {
@@ -19,7 +21,7 @@ module.exports = {
         // 排除也就是不转换node_modules下面的.js文件
         exclude: /(node_modules|bower_components)/,
         // 加载器  webpack2需要loader写完整 不能写babel 要写 bable-loader
-        use: [{ loader: 'babel-loader' }]
+        use: [{ loader: 'cache-loader' }, { loader: 'babel-loader' }]
         // 使用多进程加快速度
         // use: 'happypack/loader?id=happyBabel'
       }
@@ -37,6 +39,15 @@ module.exports = {
       // threadPool: happyThreadPool,
       // // 允许 HappyPack 输出日志
       // verbose: true
+    }),
+    new webpack.optimize.ModuleConcatenationPlugin(), // 减少闭包
+    new UglifyJsPlugin({
+      uglifyOptions: {
+        mangle: false,
+        output: {
+          beautify: true
+        }
+      }
     }),
     new BundleAnalyzerPlugin()
   ]

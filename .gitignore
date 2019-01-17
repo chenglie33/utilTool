@@ -12,3 +12,4 @@ karma.conf.base.js
 *.ntvs*
 *.njsproj
 *.sln
+.cache-loader

@@ -1,6 +1,6 @@
 {
   "name": "utiltool-pubsub",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "实现发布订阅模式",
   "main": "src/dist/main.js",
   "scripts": {
@@ -27,6 +27,7 @@
     "babel-loader": "^8.0.0-beta.0",
     "babel-plugin-istanbul": "^5.1.0",
     "babel-plugin-lodash": "^3.3.4",
+    "cache-loader": "^2.0.1",
     "eslint": "^5.11.1",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
@@ -46,6 +47,7 @@
     "karma-sinon": "^1.0.5",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^3.0.5",
+    "uglifyjs-webpack-plugin": "^2.1.1",
     "webpack": "^4.28.2",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.1.2"
