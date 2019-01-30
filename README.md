@@ -33,4 +33,5 @@ API<br>
 ```bash
 Utiltool
     |-isEmpty(data) 判断是否为空 去除空格 false为空
+    |-getUrlparam(value) 获取地址栏的参数
 ```
