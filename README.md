@@ -2,7 +2,7 @@
 集成常用的方法驱动<br/>
 引入方式<br/>
 ``` bash
-    npm i utiltool-pubsub --S
+    npm i utiltool-pubsub
     import {MessageCenter,Utiltool} from 'utiltool-pubsub'
 ```
 ####目录
