@@ -1,7 +1,7 @@
 // 实现Symbol Promise的pub/sub的事件驱动  所有的驱动执行完成后执行promise
 // import '@babel/polyfill';
 // import axios from 'axios'
-var MessageCentre = function () {
+export var MessageCentre = function () {
   this.messageArr = new Map();
   this.globalMessage = new Map();
   this.sub = async function (name, { fn, context, args }) {
@@ -105,7 +105,7 @@ var MessageCentre = function () {
   }
 }
 
-class Utiltool {
+export class Utiltool {
   /**
      * 判断是否为空 空返回为false（去除空格）
      * @param data
@@ -141,7 +141,3 @@ class Utiltool {
     return value;
   }
 }
-
-export {
-  MessageCentre, Utiltool
-};

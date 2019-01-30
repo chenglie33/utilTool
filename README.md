@@ -3,7 +3,7 @@
 引入方式<br/>
 ``` bash
     npm i utiltool-pubsub --S
-    import {MessageCenter,Utiltool} from 'UtilTools'
+    import {MessageCenter,Utiltool} from 'utiltool-pubsub'
 ```
 ####目录
 

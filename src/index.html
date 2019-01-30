@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="dist/main.js"></script>
+</head>
+<body>
+    <script>
+        var messageCentre=new UtilTools.MessageCentre();
+        messageCentre.sub('test', { fn: function (a,b) {console.log(a+b)}, context: {}, args: [1,2] });
+        messageCentre.pub('test')
+    </script>
+</body>
+</html>

@@ -12,7 +12,8 @@ module.exports = {
     path: path.resolve(__dirname, 'src/dist'),
     filename: '[name].js',
     libraryTarget: 'umd',
-    library: 'UtilTools'
+    library: 'UtilTools',
+    globalObject: 'this'
   },
   module: {
     rules: [
@@ -40,7 +41,7 @@ module.exports = {
       // // 允许 HappyPack 输出日志
       // verbose: true
     }),
-    new webpack.optimize.ModuleConcatenationPlugin(), // 减少闭包
+    // new webpack.optimize.ModuleConcatenationPlugin(), // 减少闭包
     new UglifyJsPlugin({
       uglifyOptions: {
         mangle: false,
