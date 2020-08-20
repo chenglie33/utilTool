@@ -1,10 +1,10 @@
 // 实现Symbol Promise的pub/sub的事件驱动  所有的驱动执行完成后执行promise
 // import '@babel/polyfill';
 // import axios from 'axios'
-export var MessageCentre = function () {
+export const MessageCentre = function () {
   this.messageArr = new Map();
   this.globalMessage = new Map();
-  this.sub = async function (name, { fn, context, args }) {
+  this.sub = async function (name, { fn, context }) {
     let flexContex = Array.prototype.slice.call(arguments, 1)[0]
     let p = await new Promise((resolve, reject) => {
       flexContex.once = false
@@ -19,27 +19,25 @@ export var MessageCentre = function () {
   /**
    *执行驱动中的指定函数 同步执行
    */
-  this.pub = async function (name) {
-    let p = await new Promise((resolve, reject) => {
-      let fnArr = this.messageArr.get(name) || [];
-      let newFnArr = fnArr.filter((item, index) => {
-        let fn = item.fn; let context = item.context; let args = item.args; let once = item.once
-        fn.apply(context, args);
-        if (!once) { return item }
-      })
-      this.messageArr.set(name, newFnArr);
-      resolve();
+  this.pub = function (name) {
+    const args = Array.prototype.slice.call(arguments, 1)
+    let fnArr = this.messageArr.get(name) || [];
+    let newFnArr = fnArr.filter((item, index) => {
+      let fn = item.fn; let context = item.context; let once = item.once
+      fn.apply(context, args);
+      if (!once) { return item }
     })
-    return p
+    this.messageArr.set(name, newFnArr);
   }
   /**
      *执行驱动中的指定函数 异步执行
      */
-  this.pubasync = async function (name) {
+  this.pubAsync = async function (name) {
+    const args = Array.prototype.slice.call(arguments, 1)
     let p = new Promise((resolve, reject) => {
       let fnArr = this.messageArr.get(name) || [];
       let newFnArr = fnArr.filter((item, index) => {
-        let fn = item.fn; let context = item.context; let args = item.args; let once = item.once
+        let fn = item.fn; let context = item.context; let once = item.once
         fn.apply(context, args);
         if (!once) { return item }
       })
@@ -114,11 +112,11 @@ export class Utiltool {
   static isEmpty (data) {
     let str = /\s+/g;
     if (!data || data === '' || typeof data === 'undefined' || data === null) {
-      return false
+      return true
     }
-    let datas = data.replace(str, '');
-    if (datas === '') return false
-    return true;
+    let datas = String(data).replace(str, '');
+    if (datas === '') return true
+    return false;
   }
 
   /**
@@ -139,5 +137,80 @@ export class Utiltool {
       });
     }
     return value;
+  }
+  /**
+   * 时间格式化
+   * @param {*} fmt
+   * @param {*} date
+   */
+  static dateFormat (fmt, date) {
+    let ret;
+    const opt = {
+      'Y+': date.getFullYear().toString(), // 年
+      'm+': (date.getMonth() + 1).toString(), // 月
+      'd+': date.getDate().toString(), // 日
+      'H+': date.getHours().toString(), // 时
+      'M+': date.getMinutes().toString(), // 分
+      'S+': date.getSeconds().toString() // 秒
+    };
+    for (let k in opt) {
+      ret = new RegExp('(' + k + ')').exec(fmt);
+      if (ret) {
+        fmt = fmt.replace(ret[1], (ret[1].length === 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, '0')))
+      };
+    };
+    return fmt;
+  }
+  /**
+   * 加
+   * @param {*} arg1
+   * @param {*} arg2
+   */
+  static accAdd (arg1, arg2) {
+    var r1, r2, m;
+    try { r1 = arg1.toString().split('.')[1].length } catch (e) { r1 = 0 };
+    try { r2 = arg2.toString().split('.')[1].length } catch (e) { r2 = 0 };
+    m = Math.pow(10, Math.max(r1, r2));
+    return (arg1 * m + arg2 * m) / m;
+  }
+  /**
+   * 减
+   * @param {*} arg1
+   * @param {*} arg2
+   */
+  static accSubtr (arg1, arg2) {
+    var r1, r2, m, n;
+    try { r1 = arg1.toString().split('.')[1].length; } catch (e) { r1 = 0; }
+    try { r2 = arg2.toString().split('.')[1].length; } catch (e) { r2 = 0; }
+    m = Math.pow(10, Math.max(r1, r2));
+    // 动态控制精度长度
+    n = (r1 >= r2) ? r1 : r2;
+    return ((arg1 * m - arg2 * m) / m).toFixed(n);
+  }
+  /**
+   * 乘
+   * @param {*} arg1
+   * @param {*} arg2
+   */
+  static accMul (arg1, arg2) {
+    var m = 0; var s1 = arg1.toString(); var s2 = arg2.toString();
+    try { m += s1.split('.')[1].length } catch (e) {};
+    try { m += s2.split('.')[1].length } catch (e) {};
+    return Number(s1.replace('.', '')) * Number(s2.replace('.', '')) / Math.pow(10, m);
+  }
+  /**
+   * 除
+   * @param {*} arg1
+   * @param {*} arg2
+   */
+  static accDivCoupon (arg1, arg2) {
+    var t1 = 0; var t2 = 0; var r1; var r2;
+    try { t1 = arg1.toString().split('.')[1].length } catch (e) {}
+    try { t2 = arg2.toString().split('.')[1].length } catch (e) {}
+
+    r1 = Number(arg1.toString().replace('.', ''));
+
+    r2 = Number(arg2.toString().replace('.', ''));
+    return (r1 / r2) * Math.pow(10, t2 - t1);
   }
 }

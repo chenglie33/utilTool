@@ -14,8 +14,10 @@ API<br>
 MessageCentr
     |--sub() 注册驱动方法
     |   |-name 注册的名称 
-    |   |-{ fn, context, args } 注册的方法 上下文 参数
+    |   |-{ fn, context } 注册的方法 上下文
     |--subOnce（） 注册驱动方法 在第一次执行以后将会被注销
+    |--pub（'name',[,...args] ） 执行注册方法 同步方法 args：参数
+    |--pubAsync('name',[,...args] ） 执行注册方法 同步方法 args：参数
     |--removeSub（） 删除指定的驱动名称
     |   |-name 注册的名称
     |--clearMessageCenter（） 注销所有的驱动
@@ -34,4 +36,9 @@ API<br>
 Utiltool
     |-isEmpty(data) 判断是否为空 去除空格 false为空
     |-getUrlparam(value) 获取地址栏的参数
+    |-dateFormat(fmt, date) 时间格式化
+    |-accAdd (arg1, arg2) 加
+    |-accSubtr (arg1, arg2) 减
+    |-accMul (arg1, arg2) 乘
+    |-accDivCoupon (arg1, arg2)  除
 ```

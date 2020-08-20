@@ -7,7 +7,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 module.exports = {
   mode: 'production',
   entry: './src/index.js',
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
   output: {
     path: path.resolve(__dirname, 'src/dist'),
     filename: '[name].js',
